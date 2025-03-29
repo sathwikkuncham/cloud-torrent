@@ -17,7 +17,7 @@ import (
 
 	"github.com/NYTimes/gziphandler"
 	"github.com/jpillora/cloud-torrent/engine"
-	"github.com/jpillora/cloud-torrent/static"
+	ctstatic "github.com/jpillora/cloud-torrent/static"
 	"github.com/jpillora/cookieauth"
 	"github.com/jpillora/requestlog"
 	"github.com/jpillora/scraper/scraper"
@@ -25,7 +25,7 @@ import (
 	"github.com/skratchdot/open-golang/open"
 )
 
-//Server is the "State" portion of the diagram
+// Server is the "State" portion of the diagram
 type Server struct {
 	//config
 	Title      string `help:"Title of this instance" env:"TITLE"`
@@ -42,8 +42,9 @@ type Server struct {
 	scraper       *scraper.Handler
 	scraperh      http.Handler
 	//torrent engine
-	engine *engine.Engine
-	state  struct {
+	engine    *engine.Engine
+	startTime time.Time
+	state     struct {
 		velox.State
 		sync.Mutex
 		Config          engine.Config
@@ -63,6 +64,7 @@ type Server struct {
 
 // Run the server
 func (s *Server) Run(version string) error {
+	s.startTime = time.Now()
 	isTLS := s.CertPath != "" || s.KeyPath != "" //poor man's XOR
 	if isTLS && (s.CertPath == "" || s.KeyPath == "") {
 		return fmt.Errorf("You must provide both key and cert paths")
@@ -94,11 +96,9 @@ func (s *Server) Run(version string) error {
 	//torrent engine
 	s.engine = engine.New()
 	//configure engine
-	c := engine.Config{
-		DownloadDirectory: "./downloads",
-		EnableUpload:      true,
-		AutoStart:         true,
-	}
+	c := engine.DefaultConfig()
+	c.DownloadDirectory = "./downloads"
+
 	if _, err := os.Stat(s.ConfigPath); err == nil {
 		if b, err := ioutil.ReadFile(s.ConfigPath); err != nil {
 			return fmt.Errorf("Read configuration error: %s", err)

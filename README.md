@@ -141,3 +141,19 @@ This project is the rewrite of the original [Node version](https://github.com/jp
 Credits to @anacrolix for https://github.com/anacrolix/torrent
 
 Copyright (c) 2017 Jaime Pillora
+
+## Enhanced Reliability and Performance
+
+This fork of Cloud Torrent includes significant enhancements for reliability, performance, and resource management:
+
+- **Memory Management**: Smart memory usage tracking and limits to prevent RAM exhaustion
+- **Download Reliability**: Health monitoring and automatic recovery of stalled downloads
+- **Resource Control**: Configurable limits for bandwidth, connections, and concurrent downloads
+- **Enhanced File System**: Better handling of large files and directories
+- **Detailed Monitoring**: New API endpoints for detailed torrent and system status
+
+For more information, see [improvements.md](docs/improvements.md).
+
+## Docker Support
+
+This version includes Docker support for easy deployment. See [DOCKER.md](DOCKER.md) for instructions.

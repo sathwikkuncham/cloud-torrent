@@ -1,0 +1,23 @@
+services:
+  cloud-torrent:
+    image: your-registry/cloud-torrent:latest # Add an explicit image name
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cloud-torrent
+    ports:
+      - "3000:3000"
+      - "50007:50007"  # Incoming torrent port
+      - "50007:50007/udp"  # Incoming torrent port (UDP)
+    volumes:
+      - torrent_data:/downloads # Use a named volume for downloads
+      - ./config:/config
+    restart: unless-stopped
+    environment:
+      - TZ=UTC
+    # Limit resources to test memory management
+    mem_limit: 512M
+    cpus: 1.0
+
+volumes: # Define the named volume
+  torrent_data:

@@ -1,0 +1,23 @@
+{
+  "AutoStart": true,
+  "DisableEncryption": false,
+  "DownloadDirectory": "/downloads",
+  "EnableUpload": true,
+  "EnableSeeding": true,
+  "IncomingPort": 50007,
+  
+  "MaxMemoryUsage": 419430400,
+  "MaxConcurrentTorrents": 3,
+  "BufferPerTorrent": 4194304,
+  
+  "MaxConnectionsPerTorrent": 30,
+  "MaxDownloadRate": 0,
+  "MaxUploadRate": 0,
+  "WriteBufferSize": 256,
+  "ReadCacheSize": 32,
+  
+  "EnableAutoRetry": true,
+  "MaxRetries": 3,
+  "RetryBackoffFactor": 1.5,
+  "HealthCheckInterval": 30
+} 
