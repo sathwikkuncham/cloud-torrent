@@ -6,14 +6,14 @@
   "EnableSeeding": true,
   "IncomingPort": 50007,
   
-  "MaxMemoryUsage": 419430400,
+  "MaxMemoryUsage": 7730941132,
   "MaxConcurrentTorrents": 3,
-  "BufferPerTorrent": 4194304,
+  "BufferPerTorrent": 67108864,
   
   "MaxConnectionsPerTorrent": 30,
   "MaxDownloadRate": 0,
   "MaxUploadRate": 0,
-  "WriteBufferSize": 256,
+  "WriteBufferSize": 16384,
   "ReadCacheSize": 32,
   
   "EnableAutoRetry": true,
